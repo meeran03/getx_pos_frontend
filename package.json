@@ -35,6 +35,7 @@
     "react-dropzone": "^11.4.2",
     "react-dropzone-uploader": "^2.11.0",
     "react-google-maps": "9.4.5",
+    "react-ridge-state": "^4.2.8",
     "react-router-dom": "5.2.0",
     "react-scripts": "3.4.1",
     "react-swipeable-views": "0.13.9",

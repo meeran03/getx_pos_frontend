@@ -20,8 +20,8 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
-import {useHistory} from 'react-router-dom'
-import { getComplains } from "Services/Complains";
+import { useHistory } from 'react-router-dom'
+// import { getComplains } from "Services/Complains";
 import Cookies from "js-cookie";
 
 const useStyles = makeStyles(styles);
@@ -39,9 +39,9 @@ export default function AdminNavbarLinks() {
       setOpenNotification(event.currentTarget);
     }
   };
-  const handleCloseNotification = (item=null) => {
+  const handleCloseNotification = (item = null) => {
     if (item != null) {
-      history.push({pathname : '/admin/complains/' + item.id,complain : item})
+      history.push({ pathname: '/admin/complains/' + item.id, complain: item })
     }
     setOpenNotification(null);
   };
@@ -59,12 +59,12 @@ export default function AdminNavbarLinks() {
   const handleLogout = () => {
     Cookies.remove("token")
     Cookies.remove("user")
-    history.push({pathname : '/admin/'})
+    history.push({ pathname: '/admin/' })
   };
 
-  React.useEffect(() => {
-    getComplains(1,true).then(res => setComplains(res))
-  },[])
+  // React.useEffect(() => {
+  //   getComplains(1,true).then(res => setComplains(res))
+  // },[])
 
   return (
     <div>
@@ -72,13 +72,13 @@ export default function AdminNavbarLinks() {
         color={window.innerWidth > 959 ? "transparent" : "black"}
         justIcon={window.innerWidth > 959}
         simple={!(window.innerWidth > 959)}
-        aria-label="Dashboard"
+        aria-label="POS"
         className={classes.buttonLink}
-        onClick={() => history.push("/admin")}
+        onClick={() => history.push("/pos")}
       >
         <Dashboard className={classes.icons} />
         <Hidden mdUp implementation="css">
-          <p className={classes.linkText}>Dashboard</p>
+          <p className={classes.linkText}>Pos</p>
         </Hidden>
       </Button>
       <div className={classes.manager}>
@@ -122,7 +122,7 @@ export default function AdminNavbarLinks() {
               <Paper>
                 <ClickAwayListener onClickAway={handleCloseNotification}>
                   <MenuList role="menu">
-                    {complains?.map((item,index) => (
+                    {complains?.map((item, index) => (
                       <MenuItem
                         onClick={() => handleCloseNotification(item)}
                         className={classes.dropdownItem}

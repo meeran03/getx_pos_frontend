@@ -116,7 +116,7 @@ export default function Admin({ ...rest }) {
       </main>
       <Sidebar3
         routes={routes.filter(route => route.invisible === undefined)}
-        logoText={"Getx"}
+        // logoText={"Getx"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

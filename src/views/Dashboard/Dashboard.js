@@ -30,22 +30,14 @@ import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import { bugs, website, server } from "variables/general.js";
-
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
-} from "variables/charts.js";
-
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import { TableBody, TableCell, TableHead, Table, TableRow, Button, Avatar } from '@material-ui/core'
 
 // import Purchases from '../Purchases/Purchases'
-import { getCustomers } from "Services/Customers";
-import { getDeliveryBoys } from "Services/DeliveryBoys";
-import { getStores } from "Services/Stores";
-import { getComplains } from "Services/Complains";
+// import { getCustomers } from "Services/Customers";
+// import { getDeliveryBoys } from "Services/DeliveryBoys";
+// import { getStores } from "Services/Stores";
+// import { getComplains } from "Services/Complains";
 import { getPurchases } from "Services/Purchases";
 import { MoneyOffRounded } from "@material-ui/icons";
 
@@ -138,7 +130,7 @@ export default function Dashboard() {
                   <Tasks
                     checkedIndexes={[0, 3]}
                     tasksIndexes={[0, 1, 2, 3]}
-                    func={() => getCustomers(0, true)}
+                    // func={() => getCustomers(0, true)}
                     url="customers"
                   />
                 )
@@ -150,7 +142,7 @@ export default function Dashboard() {
                   <Tasks
                     checkedIndexes={[0]}
                     tasksIndexes={[0, 1]}
-                    func={() => getDeliveryBoys(false, 0, true)}
+                    // func={() => getDeliveryBoys(false, 0, true)}
                     url="deliveryboys"
                   />
                 )
@@ -162,7 +154,7 @@ export default function Dashboard() {
                   <Tasks
                     checkedIndexes={[1]}
                     tasksIndexes={[0, 1, 2]}
-                    func={() => getStores(0, true)}
+                    // func={() => getStores(0, true)}
                     url="stores"
                   />
                 )

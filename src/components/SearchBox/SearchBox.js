@@ -16,7 +16,7 @@ export default function SearchBox(props) {
     const classes = useStyles();
     return (
         <div xs={12} sm={12} md={12}
-            className={classes.root}
+        // className={classes.root}
         >
             <Autocomplete
                 freeSolo

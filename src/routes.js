@@ -20,13 +20,7 @@ import BlockRoundedIcon from '@material-ui/icons/BlockRounded'
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded'
 import AllInclusiveRoundedIcon from '@material-ui/icons/AllInclusiveRounded'
 
-// Getx's Components
-import Login from 'views/Auth/Login'
-// import SendNotifications from 'views/SendNotifications/SendNotifications.js'
-// //Stores
-// import Stores from 'views/Stores/Stores'
-// import ViewStore from 'views/Stores/ViewStore'
-// import UpdateStore from 'views/Stores/UpdateStore'
+// Getx's Routes
 //Customers
 import Customers from 'views/Customers/Customers'
 import ViewCustomer from 'views/Customers/ViewCustomer'
@@ -35,18 +29,10 @@ import UpdateCustomer from 'views/Customers/UpdateCustomer'
 import Suppliers from 'views/Supplier/Suppliers'
 import ViewSupplier from 'views/Supplier/ViewSupplier'
 import UpdateSupplier from 'views/Supplier/UpdateSupplier'
-// //DeliveryBoys
-// import DeliveryBoys from 'views/DeliveryBoys/DeliveryBoys'
-// import ViewDeliveryBoy from 'views/DeliveryBoys/ViewDeliveryBoy'
-// import UpdateDeliveryBoy from 'views/DeliveryBoys/UpdateDeliveryBoy'
 //Categories
 import Categories from 'views/Categories/Categories'
-//Banners
+// Roles
 import Roles from 'views/Roles/Roles'
-//Areas
-// import Areas from 'views/Areas/Areas'
-//Subareas
-// import Subareas from 'views/SubAreas/SubAreas'
 // Products
 import Products from 'views/Products/Products'
 import AddProduct from 'views/Products/AddProduct'
@@ -54,26 +40,15 @@ import UpdateProduct from 'views/Products/UpdateProducts'
 // Purchases
 import Purchases from 'views/Purchases/Purchases'
 import PurchaseDetail from 'views/Purchases/PurchaseDetail'
-// //Complains
-// import Complains from 'views/Complains/Complains'
-// import ComplainDetail from 'views/Complains/ComplainDetail'
-// //Credit
-// import Credit from 'views/Credit/Credit'
+
 //Unit
 import Units from 'views/Units/Units'
 //Discounts
 import Discounts from 'views/Discounts/Discounts'
-//Subscriptions
-// import Subscriptions from 'views/Subscriptions/Subscriptions'
-// import SubscriptionsDetail from 'views/Subscriptions/SubscriptionsDetail'
-// //SubscriptionTypes
-// import SubscriptionTypes from 'views/SubscriptionTypes/SubscriptionTypes'
-
-//CancelledPurchases
-// import CancelledPurchases from 'views/CancelledPurchases/CancelledPurchases'
 import { AcUnitOutlined, AndroidSharp, ContactSupportOutlined, MeetingRoomTwoTone, MoneyOffOutlined } from '@material-ui/icons'
 import Analytics from 'views/Analytics'
 import AddPurchase from 'views/Purchases/AddPurchase'
+import POSScreen from 'views/Pos'
 
 const dashboardRoutes = [
   {
@@ -98,20 +73,6 @@ const dashboardRoutes = [
     component: Roles,
     layout: '/admin',
   },
-  // {
-  //   path: '/areas',
-  //   name: 'Areas',
-  //   icon: Map,
-  //   component: Areas,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/subareas',
-  //   name: 'Subareas',
-  //   icon: Explore,
-  //   component: Subareas,
-  //   layout: '/admin',
-  // },
   {
     path: '/categories',
     name: 'Categories',
@@ -140,13 +101,6 @@ const dashboardRoutes = [
     component: Products,
     layout: '/admin',
   },
-  // {
-  //   path: '/credit-requests',
-  //   name: 'Credit Requests',
-  //   icon: MoneyOffOutlined,
-  //   component: Credit,
-  //   layout: '/admin',
-  // },
   {
     path: '/products/add',
     name: 'Add Product',
@@ -209,52 +163,6 @@ const dashboardRoutes = [
     layout: '/admin',
     invisible: true,
   },
-  // {
-  //   path: '/stores',
-  //   name: 'Stores',
-  //   icon: StoreMallDirectorySharpIcon,
-  //   component: Stores,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/stores/update/:id',
-  //   name: 'Update Store',
-  //   icon: StoreMallDirectorySharpIcon,
-  //   component: UpdateStore,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
-  // {
-  //   path: '/deliveryboys',
-  //   name: 'Delivery Boys',
-  //   icon: RiderIcon,
-  //   component: DeliveryBoys,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/stores/:id',
-  //   name: 'View Store',
-  //   icon: StoreMallDirectorySharpIcon,
-  //   component: ViewStore,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
-  // {
-  //   path: '/deliveryboys/update/:id',
-  //   name: 'Update Delivery Boy',
-  //   icon: RiderIcon,
-  //   component: UpdateDeliveryBoy,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
-  // {
-  //   path: '/deliveryboys/:id',
-  //   name: 'View Delivery Boy',
-  //   icon: RiderIcon,
-  //   component: ViewDeliveryBoy,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
   {
     path: '/purchases',
     name: 'Purchases',
@@ -262,13 +170,6 @@ const dashboardRoutes = [
     component: Purchases,
     layout: '/admin',
   },
-  // {
-  //   path: '/cancelled-purchases',
-  //   name: 'Cancelled Purchases',
-  //   icon: BlockRoundedIcon,
-  //   component: CancelledPurchases,
-  //   layout: '/admin',
-  // },
   {
     path: '/purchases/add',
     name: 'Add Purchase Order',
@@ -285,50 +186,6 @@ const dashboardRoutes = [
     layout: '/admin',
     invisible: true,
   },
-  // {
-  //   path: '/subscriptions',
-  //   name: 'Subscriptions',
-  //   icon: CardMembershipSharpIcon,
-  //   component: Subscriptions,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/subscriptions/:id',
-  //   name: 'View Subscription Detail',
-  //   icon: CardMembershipSharpIcon,
-  //   component: SubscriptionsDetail,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
-  // {
-  //   path: '/subscription-types',
-  //   name: 'SubscriptionTypes',
-  //   icon: AllInclusiveRoundedIcon,
-  //   component: SubscriptionTypes,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/send-notifications',
-  //   name: 'Send Notifications',
-  //   icon: Notifications,
-  //   component: SendNotifications,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/complains',
-  //   name: 'See Customer Complains',
-  //   icon: ChatBubbleIcon,
-  //   component: Complains,
-  //   layout: '/admin',
-  // },
-  // {
-  //   path: '/complains/:id',
-  //   name: 'Complain Detail',
-  //   icon: ChatBubbleIcon,
-  //   component: ComplainDetail,
-  //   layout: '/admin',
-  //   invisible: true,
-  // },
 ]
 
 export default dashboardRoutes

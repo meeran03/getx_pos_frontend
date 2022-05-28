@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { getStore } from '../../Services/Stores'
 import MapComponent from '../../components/Map/MapComponent'
 
 // Here we use Material Ui Components

@@ -183,3 +183,19 @@ export function searchProductVariations(search) {
       throw e
     })
 }
+
+// get best selling product variations
+export function getBestSellingProductVariations() {
+  const token = Cookies.get('token')
+  return AXIOS.get('/product/best-selling/', {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  })
+    .then((response) => {
+      return response.data
+    })
+    .catch((e) => {
+      throw e
+    })
+}

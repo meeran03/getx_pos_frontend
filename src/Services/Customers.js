@@ -142,7 +142,7 @@ export async function searchCustomers(search) {
             "Authorization": `Token ${token}`
         },
         params: {
-            search: search
+            query: search
         }
     }).then(res => {
         console.log(res.data)

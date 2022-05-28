@@ -12748,6 +12748,11 @@
     "lodash.throttle" "^4.1.1"
     "resize-observer-polyfill" "^1.5.1"
 
+"react-ridge-state@^4.2.8":
+  "integrity" "sha512-27WFKyhYNPGeFyI2mWoY18Ms7kdB7frjcuQaGLpVU8YyBocUQrN95iH6IUCVHP5qWCK02CW4UJ+wDh96jOHNyw=="
+  "resolved" "https://registry.npmjs.org/react-ridge-state/-/react-ridge-state-4.2.8.tgz"
+  "version" "4.2.8"
+
 "react-router-dom@5.2.0":
   "integrity" "sha512-gxAmfylo2QUjcwxI63RhQ5G85Qqt4voZpUXSEqCwykV0baaOTQDR1f0PmY8AELqIyVc0NEZUj0Gov5lNGcXgsA=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.2.0.tgz"
