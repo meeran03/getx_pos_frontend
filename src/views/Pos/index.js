@@ -5,11 +5,13 @@ import LeftSideBar from './LeftSideBar';
 import PageContent from './PageContent';
 import "./pos.css"
 import RightSideBar from './RightSideBar';
-
+import audioURL from '../../assets/audio/notification.mp3';
+import useSound from 'use-sound';
 
 export function ModalReceipt(props) {
     const [cart, setCart] = cartState.use()
     const { data } = props
+    const [playSound] = useSound(audioURL);
     const submit = () => {
         let obj = data;
         obj.variations = cart;
@@ -17,6 +19,7 @@ export function ModalReceipt(props) {
             console.log(res)
             setCart([]);
             props.setOpen(false);
+            playSound();
         })
         // console.log(data)
     }

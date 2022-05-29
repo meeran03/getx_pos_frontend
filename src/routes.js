@@ -49,6 +49,8 @@ import { AcUnitOutlined, AndroidSharp, ContactSupportOutlined, MeetingRoomTwoTon
 import Analytics from 'views/Analytics'
 import AddPurchase from 'views/Purchases/AddPurchase'
 import POSScreen from 'views/Pos'
+import Sales from 'views/Sales/Sales'
+import SaleDetail from 'views/Sales/SaleDetails'
 
 const dashboardRoutes = [
   {
@@ -183,6 +185,21 @@ const dashboardRoutes = [
     name: 'View Purchase Detail',
     icon: ShoppingCartRoundedIcon,
     component: PurchaseDetail,
+    layout: '/admin',
+    invisible: true,
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    icon: ShoppingCartRoundedIcon,
+    component: Sales,
+    layout: '/admin',
+  },
+  {
+    path: '/sales/view/:id',
+    name: 'View Sale Detail',
+    icon: ShoppingCartRoundedIcon,
+    component: SaleDetail,
     layout: '/admin',
     invisible: true,
   },

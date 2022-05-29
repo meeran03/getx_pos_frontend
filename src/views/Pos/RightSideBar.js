@@ -48,6 +48,10 @@ function CartItem(props) {
                         onClick={() => {
                             let newCart = [...cart];
                             newCart[index].quantity += 1;
+                            if (newCart[index].quantity > item.original_quantity) {
+                                newCart[index].quantity = item.original_quantity;
+                                alert("Product out of Stock");
+                            }
                             setCart(newCart);
                         }}
                         class="rounded-lg text-center py-1 text-white bg-blue-gray-600 hover:bg-blue-gray-700 focus:outline-none">

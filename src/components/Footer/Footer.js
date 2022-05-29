@@ -27,11 +27,11 @@ export default function Footer(props) {
     [classes.footerWhiteFont]: whiteFont
   });
   return (
-<footer class="p-4 footer bg-base-300 text-base-content footer-center">
-  <div>
-    <p>Copyright © 2021 - All right reserved by Webseter Pvt. Ltd</p>
-  </div>
-</footer>
+    <footer class="p-4 footer bg-base-300 text-base-content footer-center">
+      <div>
+        <p>Copyright © 2021 - All right reserved by Giant Eyes Technologies Pvt. Ltd</p>
+      </div>
+    </footer>
 
   );
 }

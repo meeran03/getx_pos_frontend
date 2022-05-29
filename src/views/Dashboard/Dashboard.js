@@ -119,7 +119,7 @@ export default function Dashboard() {
 
       <GridContainer>
         <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
+          {/* <CustomTabs
             title="Recent Registers"
             headerColor="primary"
             tabs={[
@@ -160,7 +160,7 @@ export default function Dashboard() {
                 )
               }
             ]}
-          />
+          /> */}
         </GridItem>
 
         <GridItem xs={12} sm={12} md={6}>

@@ -39,6 +39,10 @@ function ProductCard(props) {
                     <div class="badge badge-accent badge-outline">Rs. {product.default_sell_price}</div>
                     <div class="btn btn-success btn-sm "
                         onClick={() => {
+                            if (product.quantity === 0) {
+                                alert('Product out of stock')
+                                return;
+                            }
                             setCart(cart => {
                                 const newCart = [...cart];
                                 const index = newCart.findIndex(item => item.id === product.id);
@@ -50,9 +54,15 @@ function ProductCard(props) {
                                         sell_price: product.default_sell_price,
                                         product_id: product.product_id,
                                         image: product.image,
+                                        original_quantity: product.quantity
                                     })
                                 } else {
+
                                     newCart[index].quantity += 1;
+                                    if (newCart[index].quantity > product.quantity) {
+                                        alert('Product out of stock')
+                                        newCart[index].quantity = product.quantity;
+                                    }
                                 }
                                 return newCart;
                             })
@@ -68,13 +78,13 @@ export default function PageContent(props) {
     const [products, setProducts] = React.useState([])
     const [query, setQuery] = React.useState('')
 
-
+    const [cart, setCart] = cartState.use();
     React.useEffect(() => {
         getBestSellingProductVariations().then(res => {
             setProducts(res)
         }
         )
-    }, [])
+    }, [cart])
     return (
         <div class="flex flex-col bg-blue-gray-50 h-full w-full py-4">
             <SearchInput
