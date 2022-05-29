@@ -68,7 +68,12 @@ export default function RightSideBar(props) {
     const [total, setTotal] = React.useState(0)
     const [discount, setDiscount] = React.useState(0)
 
-    const [searchResults, setSearchResults] = React.useState([])
+    const [searchResults, setSearchResults] = React.useState([
+        {
+            name: "Walk in Customer",
+            id: 1
+        }
+    ])
     const [customer, setCustomer] = React.useState(null)
     const [query, setQuery] = React.useState('')
     React.useEffect(() => {
@@ -77,6 +82,10 @@ export default function RightSideBar(props) {
             newTotal += parseFloat(item.quantity) * parseFloat(item.sell_price);
         })
         setTotal(newTotal)
+        props.setData({
+            ...props.data,
+            final_total: newTotal,
+        })
     }, [cart])
     const [discounts, setDiscounts] = React.useState([])
     React.useEffect(() => {
@@ -88,15 +97,25 @@ export default function RightSideBar(props) {
 
     React.useEffect(() => {
         // apply selected discount on total
-        let newTotal = total;
+        let newTotal = 0;
+        cart.forEach(item => {
+            newTotal += parseFloat(item.quantity) * parseFloat(item.sell_price);
+        })
         let temp = discounts.find(item => item.id == discount)
+        let discount_amount = temp ? newTotal * (parseFloat(temp.percentage) / 100) : 0
         if (temp) {
-            newTotal = parseFloat(newTotal) - (parseFloat(newTotal) * parseFloat(temp.percentage)) / 100
+            newTotal = parseFloat(newTotal) - parseFloat(discount_amount)
         }
         else {
             setCart([...cart])
         }
-        setTotal(newTotal)
+        setTotal(newTotal.toFixed(2))
+        props.setData({
+            ...props.data,
+            final_total: newTotal.toFixed(2),
+            discount_id: discount,
+            discount_amount: discount_amount.toFixed(2),
+        })
     }, [discount])
     return (
         <div class="w-5/12 flex flex-col bg-blue-gray-50 h-full bg-white pr-4 pl-2 py-4">
@@ -201,7 +220,15 @@ export default function RightSideBar(props) {
                                         console.log(value)
                                         console.log(searchResults.find(item => item.name == value))
                                         if (reason === "select-option") {
-                                            setCustomer(searchResults.find(item => item.name == value))
+                                            let temp = searchResults.find(item => item.name == value);
+                                            setCustomer(temp)
+                                            props.setData(
+                                                {
+                                                    ...props.data,
+                                                    contact_id: temp.id,
+                                                    customer: temp.name,
+                                                }
+                                            )
                                         }
                                     }}
                                     value={query}
@@ -210,7 +237,7 @@ export default function RightSideBar(props) {
                             </div>
                         </div>
 
-                        <hr class="my-2" />
+                        {/* <hr class="my-2" />
                         <div class="grid grid-cols-3 gap-2 mt-2">
                             <template x-for="money in moneys">
                                 <button
@@ -218,26 +245,27 @@ export default function RightSideBar(props) {
                                     class="bg-white rounded-lg shadow hover:shadow-lg focus:outline-none inline-block px-2 py-1 text-sm">+<span
                                         x-text="numberFormat(money)"></span></button>
                             </template>
-                        </div>
+                        </div> */}
                     </div>
-                    <div x-show="change < 0"
+                    {/* <div x-show="change < 0"
                         class="flex mb-3 text-lg font-semibold bg-pink-100 text-blue-gray-700 rounded-lg py-2 px-3">
                         <div class="text-right flex-grow text-pink-600" x-text="priceFormat(change)">
                         </div>
-                    </div>
-                    <div x-show="change == 0 && cart.length > 0"
+                    </div> */}
+                    {/* <div x-show="change == 0 && cart.length > 0"
                         class="flex justify-center mb-3 text-lg font-semibold bg-cyan-50 text-cyan-700 rounded-lg py-2 px-3">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                         </svg>
-                    </div>
-                    <button class="text-white rounded-2xl text-lg w-full py-3 focus:outline-none"
-                    //             x-bind:class="{
-                    //     'bg-cyan-500 hover:bg-cyan-600': submitable(),
-                    //     'bg-blue-gray-200': !submitable()
-                    //   }" :disabled="!submitable()" x-on:click="submit()"
+                    </div> */}
+                    <button className={`text-white rounded-2xl text-lg w-full py-3 focus:outline-none`
+                        + (cart.length > 0 ? " bg-cyan-500 hover:bg-cyan-600" : " bg-gray-300")}
+                        disabled={cart.length === 0 || customer === null}
+                        onClick={() => {
+                            props.setOpen(true)
+                        }}
                     >
                         SUBMIT
                     </button>

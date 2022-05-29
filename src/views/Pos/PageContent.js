@@ -68,6 +68,7 @@ export default function PageContent(props) {
     const [products, setProducts] = React.useState([])
     const [query, setQuery] = React.useState('')
 
+
     React.useEffect(() => {
         getBestSellingProductVariations().then(res => {
             setProducts(res)

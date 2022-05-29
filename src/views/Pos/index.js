@@ -1,4 +1,6 @@
 import React from 'react';
+import { addSale } from 'Services/Sale';
+import { cartState } from 'states/cartState';
 import LeftSideBar from './LeftSideBar';
 import PageContent from './PageContent';
 import "./pos.css"
@@ -6,6 +8,18 @@ import RightSideBar from './RightSideBar';
 
 
 export function ModalReceipt(props) {
+    const [cart, setCart] = cartState.use()
+    const { data } = props
+    const submit = () => {
+        let obj = data;
+        obj.variations = cart;
+        addSale(obj).then(res => {
+            console.log(res)
+            setCart([]);
+            props.setOpen(false);
+        })
+        // console.log(data)
+    }
     return (
         <div x-show="isShowModalReceipt"
             class="fixed w-full h-screen left-0 top-0 z-10 flex flex-wrap justify-center content-center p-24">
@@ -26,14 +40,14 @@ export function ModalReceipt(props) {
             >
                 <div id="receipt-content" class="text-left w-full text-sm p-6 overflow-auto">
                     <div class="text-center">
-                        <img src="img/receipt-logo.png" alt="Tailwind POS" class="mb-3 w-8 h-8 inline-block" />
-                        <h2 class="text-xl font-semibold">TAILWIND POS</h2>
-                        <p>CABANG KONOHA SELATAN</p>
+                        <img src={require('../../assets/img/logo2.png')} alt="Tailwind POS" class="mb-3 w-8 h-8 inline-block" />
+                        <h2 class="text-xl font-semibold">Getx POS</h2>
+                        <p>Below is Your Invoice</p>
                     </div>
-                    <div class="flex mt-4 text-xs">
-                        <div class="flex-grow">No: <span x-text="receiptNo"></span></div>
+                    {/* <div class="flex mt-4 text-xs">
+                        <div class="flex-grow">Invoice No: <span x-text="receiptNo">{data.invoice_no}</span></div>
                         <div x-text="receiptDate"></div>
-                    </div>
+                    </div> */}
                     <hr class="my-2" />
                     <div>
                         <table class="w-full text-xs">
@@ -46,43 +60,48 @@ export function ModalReceipt(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <template
-                                // x-for="(item, index) in cart" :key="item"
-                                >
-                                    <tr>
-                                        <td class="py-2 text-center" x-text="index+1"></td>
-                                        <td class="py-2 text-left">
-                                            <span x-text="item.name"></span>
-                                            <br />
-                                            <small x-text="priceFormat(item.price)"></small>
-                                        </td>
-                                        <td class="py-2 text-center" x-text="item.qty"></td>
-                                        <td class="py-2 text-right" x-text="priceFormat(item.qty * item.price)"></td>
-                                    </tr>
-                                </template>
+                                {cart.map((item, index) => {
+                                    return (
+                                        <tr>
+                                            <td class="py-1 text-center">{index + 1}</td>
+                                            <td class="py-1 text-left">
+                                                <span>{item.name}</span>
+                                                <br />
+                                                <small>{item.sell_price}</small>
+                                            </td>
+                                            <td class="py-1 text-center">{item.quantity}</td>
+                                            <td class="py-1 text-right">Rs. {parseFloat(item.sell_price) * parseFloat(item.quantity)}</td>
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
                     </div>
                     <hr class="my-2" />
                     <div>
-                        <div class="flex font-semibold">
-                            <div class="flex-grow">TOTAL</div>
-                            <div x-text="priceFormat(getTotalPrice())"></div>
+                        <div class="flex text-xs font-semibold">
+                            <div class="flex-grow">Subtotal: </div>
+                            <div x-text="priceFormat(cash)">{parseFloat(data.final_total) + parseFloat(data.discount_amount)}</div>
                         </div>
                         <div class="flex text-xs font-semibold">
-                            <div class="flex-grow">PAY AMOUNT</div>
-                            <div x-text="priceFormat(cash)"></div>
+                            <div class="flex-grow">Discount: </div>
+                            <div x-text="priceFormat(cash)">{data.discount_amount}</div>
+                        </div>
+                        <div class="flex font-semibold">
+                            <div class="flex-grow">Total</div>
+                            <div x-text="priceFormat(getTotalPrice())">{data.final_total}</div>
                         </div>
                         <hr class="my-2" />
                         <div class="flex text-xs font-semibold">
-                            <div class="flex-grow">CHANGE</div>
-                            <div x-text="priceFormat(change)"></div>
+                            <div class="flex-grow">Customer: </div>
+                            <div x-text="priceFormat(change)">{data.customer}</div>
                         </div>
                     </div>
                 </div>
                 <div class="p-4 w-full">
                     <button class="bg-cyan-500 text-white text-lg px-4 py-3 rounded-2xl w-full focus:outline-none"
-                    // x-on:click="printAndProceed()"
+                        // x-on:click="printAndProceed()"
+                        onClick={submit}
                     >PROCEED</button>
                 </div>
             </div>
@@ -150,6 +169,10 @@ export function ModalFirstTime(props) {
 }
 
 export default function POSScreen(props) {
+    const [open, setOpen] = React.useState(false)
+    const [data, setData] = React.useState({
+        invoice_no: '',
+    })
     return (
         <body class="bg-blue-gray-50"
         // x-data="initApp()" x-init="initDatabase()"
@@ -158,12 +181,12 @@ export default function POSScreen(props) {
                 <LeftSideBar />
                 <div class="flex-grow flex">
                     <PageContent />
-                    <RightSideBar />
+                    <RightSideBar data={data} setData={setData} setOpen={setOpen} open={open} />
                 </div>
-                {/* 
-                <ModalFirstTime />
 
-                <ModalReceipt /> */}
+                {/* <ModalFirstTime /> */}
+
+                {open && <ModalReceipt setOpen={setOpen} data={data} />}
             </div>
         </body>
     );
